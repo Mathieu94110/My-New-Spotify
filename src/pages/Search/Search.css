@@ -1,0 +1,23 @@
+.globalSearchContainer {
+  height: 500px;
+  width: 100%;
+}
+
+.searchContainer {
+  height: 100px;
+  width: 100%;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+/*
+.search {
+  height: 100px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+*/
