@@ -58,12 +58,12 @@ export default class Home extends Component {
          
           {this.state.playlists.map((playlist, index) => {
             return (
-              <Card key={index} style={{ margin: "5px" }}>
+              <Card key={index} style={{ margin: "5px" }} className="card">
                 <CardActionArea>
                   {playlist.images[0] && (
                     <CardMedia
                       image={playlist.images[0].url}
-                      style={{ height: "200px" }}
+           className="cardImageSize"
                     />
                   )}
 
@@ -75,6 +75,7 @@ export default class Home extends Component {
                 </CardActionArea>
                 <CardActions>
                   <Button
+                  className="buttonToTracks"
                     size="small"
                     color="primary"
                     onClick={() =>

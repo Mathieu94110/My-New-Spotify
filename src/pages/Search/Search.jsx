@@ -66,19 +66,14 @@ export default class Search extends Component {
           label="Album, Titre ou Artiste "
           value={this.state.search}
           onChange={this.handleChange}
-          style={{ marginRight: "20px", height: "50px" }}
+          className="searchTextField"
         />
         </div>
         
           <div style={{ height: "360px", width:"100%",display:"flex"}}>
           <div
-            style={{
-              width: "30%",
-              marginLeft: "5%",
-              textAlign: "center",
-               maxHeight: "100%",
-              overflow: "auto",
-            }}
+          className="searchCategories"
+     
           >
             <h2>Titres</h2>
             {this.state.tracks.map((track, index) => {
@@ -94,13 +89,10 @@ export default class Search extends Component {
             })}
           </div>
           <div
-            style={{
-              width: "30%",
-              marginRight: "5%",
-              textAlign: "center",
-                 maxHeight: "100%",
-              overflow: "auto",
-            }}
+
+className="searchCategories"
+
+        
           >
             <h2>Artistes</h2>
             {this.state.artist.map((artist, index) => {
@@ -116,13 +108,9 @@ export default class Search extends Component {
             })}
           </div>
           <div
-            style={{
-              width: "30%",
-              scrollMarginRight: "5%",
-              textAlign: "center",
-              maxHeight: "100%",
-              overflow: "auto",
-            }}
+className="searchCategories"
+
+         
           >
             <h2>Album</h2>
             {this.state.album.map((album, index) => {
@@ -143,7 +131,7 @@ export default class Search extends Component {
             </div>
           </div>
         ) :    (<div className="searchContainer">
-        <Button variant="outlined" color="primary" onClick={this.addTracks}>
+        <Button variant="outlined" color="primary" onClick={this.addTracks} className="homePageSearchButton">
           Rechercher
         </Button>
 
@@ -152,7 +140,7 @@ export default class Search extends Component {
           label="Album, Titre ou Artiste "
           value={this.state.search}
           onChange={this.handleChange}
-          style={{ marginRight: "20px", height: "50px" }}
+             className="searchTextField"
         />
         </div>)
         

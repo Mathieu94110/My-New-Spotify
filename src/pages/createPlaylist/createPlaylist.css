@@ -1,3 +1,14 @@
+.createList {
+  font-size: 1.6rem !important;
+  font-weight: 900 !important;
+}
+.MuiButtonBase-root,
+  .MuiOutlinedInput-root,
+  .MuiInputBase-formControl,.MuiButton-root ,.MuiInputBase-input , .MuiButton-outlined, .createList , .MuiButton-outlinedPrimary,
+  /* textfield text size below*/
+  .MuiFormLabel-root, .MuiFormControl-root {
+  font-size: 0.3rem !important;
+}
 @media only screen and (max-width: 1023px) {
   .createForm {
     width: 100%;
@@ -10,14 +21,33 @@
     justify-content: center;
   }
   .createList {
-    max-height: 56px;
+    height: 30px;
   }
-  .textfield {
-    width: 80px;
+  .MuiTextField-root input {
+    padding: 5px;
   }
   .createButton {
-    width: 80px;
-    padding: 9px 7px;
+    height: 30px;
+  } /* access to mui button styles properties */
+  .MuiButtonBase-root,
+  .MuiOutlinedInput-root,
+  .MuiInputBase-formControl,.MuiButton-root ,.MuiInputBase-input , .MuiButton-outlined, .createList , .MuiButton-outlinedPrimary,
+  /* textfield text size below*/
+  .MuiFormLabel-root, .MuiFormControl-root {
+    font-weight: 900 !important;
+    max-width: 50px !important;
+    padding: 5px !important;
+  }
+
+  /*playlist card*/
+  .albums_list {
+    height: auto;
+  }
+  .MuiPaper-root,
+  .MuiCard-root,
+  .MuiPaper-elevation1,
+  .MuiPaper-rounded {
+    height: 100px;
   }
 }
 
@@ -31,6 +61,9 @@
   .createListContainer {
     display: flex;
     justify-content: center;
+  }
+  .createList {
+    height: 56px;
   }
   .textfield {
     width: 150px;

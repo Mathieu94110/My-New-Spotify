@@ -6,6 +6,13 @@
 h1 {
   color: #fff;
 }
+
+.text_spotify {
+  font-size: 1.5rem;
+}
+.auth_text {
+  font-size: 1rem;
+}
 @media only screen and (max-width: 1023px) {
   .auth_page {
     display: block;
@@ -48,7 +55,6 @@ h1 {
   }
   .text_spotify {
     margin-right: 50px;
-    font-size: 30px;
     letter-spacing: 1px;
   }
 }
@@ -65,7 +71,6 @@ h1 {
     justify-content: center;
     align-items: center;
     background: linear-gradient(#e66465, #9198e5);
-    font-size: 22px;
   }
 
   .auth_image_container {
@@ -96,7 +101,6 @@ h1 {
   }
   .text_spotify {
     margin-right: 50px;
-    font-size: 40px;
     letter-spacing: 1px;
   }
 }

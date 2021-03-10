@@ -1,7 +1,10 @@
+.home_title {
+  font-size: 1rem;
+}
+
 @media only screen and (max-width: 1023px) {
   .home_page {
     width: 100%;
-    height: 100%;
   }
   .home_title {
     color: #000;
@@ -10,19 +13,45 @@
     padding: 0;
     height: 50px;
     line-height: 50px;
-    font-size: 16px;
+    margin-bottom: 10px;
   }
   .home_content {
-    width: calc(100% - 50px);
-    height: calc(100% - (50px));
     display: block;
-    align-items: center;
+
     margin: 0 25px;
   }
   .createPlaylistAndAlbums_list {
     width: 100%;
-    height: 500px;
-    display: block;
+
+    margin: 50 0;
+  }
+  .create_list {
+    margin-bottom: 10px;
+  }
+  .searchPlaylist {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin: 20px auto;
+  }
+  .cardImageSize {
+    height: 100px;
+    max-width: 100px;
+  } /*button*/
+  .MuiCardActions-root,
+  .MuiCardActions-spacing {
+    width: 50px !important;
+    position: absolute;
+    right: 30px;
+  }
+  .buttonToTracks {
+    width: 50px !important;
+    margin-right: 20px !important;
+    right: 0px !important;
+  }
+  .card {
+    height: 100px;
+    position: relative;
   }
 }
 
@@ -58,6 +87,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    margin-bottom: 10px;
   }
 
   .albums_list {
@@ -90,5 +120,8 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+  }
+  .cardImageSize {
+    height: 160px;
   }
 }
