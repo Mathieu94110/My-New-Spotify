@@ -2,9 +2,10 @@ import React, { Component } from "react";
 import axios from "axios";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-
+import "./newPlaylist.css";
+import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+import Avatar from '@material-ui/core/Avatar';
 export default class newPlaylist extends Component {
   constructor(props) {
     super(props);
@@ -13,6 +14,9 @@ export default class newPlaylist extends Component {
       tracks: [],
       search: "",
       playListId: null,
+      currentPage: 1,
+      offset: 0,
+      disabled:false,
     };
   }
   handleChange = (e) => {
@@ -20,7 +24,8 @@ export default class newPlaylist extends Component {
       search: e.target.value,
     });
   };
-  handleSubmit = () => {
+  handleSubmit = (e) => {
+    e.preventDefault();
     let access_token = localStorage.access_token;
     const config = {
       headers: {
@@ -30,15 +35,19 @@ export default class newPlaylist extends Component {
         q: this.state.search,
         type: "track",
         limit: 50,
+        offset: this.state.offset,
       },
     };
 
     axios
       .get("https://api.spotify.com/v1/search", config)
       .then((res) => {
+        console.log(res)
         this.setState({
-          tracks: res.data.tracks.items,
+          tracks: [...res.data.tracks.items],
+          offset: this.state.offset += 50
         });
+
       })
       .catch((error) => {
         // Error
@@ -52,6 +61,7 @@ export default class newPlaylist extends Component {
           console.log("Error", error.message);
         }
       });
+
   };
 
   addTrack = (track) => {
@@ -68,8 +78,8 @@ export default class newPlaylist extends Component {
     axios
       .post(
         "https://api.spotify.com/v1/playlists/" +
-          this.props.playListId +
-          "/tracks",
+        this.props.playListId +
+        "/tracks",
         {},
         config
       )
@@ -78,40 +88,104 @@ export default class newPlaylist extends Component {
         this.props.refresh();
       });
   };
+
+  nextPage = () => {
+    let access_token = localStorage.access_token;
+    const config = {
+      headers: {
+        Authorization: `Bearer ${access_token}`,
+      },
+      params: {
+        q: this.state.search,
+        type: "track",
+        limit: 50,
+        offset: this.state.offset,
+      },
+    };
+
+    axios
+      .get("https://api.spotify.com/v1/search", config)
+      .then((res) => {
+        console.log(res)
+        this.setState({
+          tracks: [...res.data.tracks.items],
+          offset: this.state.offset += 50
+        });
+if (res.status === 404) {
+        console.log("stop")
+          /* this.setState({
+            disabled: !this.state.disabled
+          })*/
+        }
+      })
+      .catch((error) => {
+        // Error
+        
+     if (error.response) {
+          console.log(error.response.data);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+        } else if (error.request) {
+          console.log(error.request);
+        } else {
+          console.log("Error", error.message);
+        }
+      });
+  }
+
+  
   render() {
+console.log(this.state.offset)
     return (
-      <div>
-        <form>
-          <label>
-            Musique:
+      <div className="newPlaylistPage">
+        <form className="searchForMyPlaylist" onSubmit={this.handleSubmit}>
+          <label className="spaceItemAndInput">
+            <span className="spaceItemAndInput_Item" >Musique :</span>
             <input type="text" onChange={this.handleChange} />
           </label>
-          <input type="submit" value="Rechercher" onClick={this.handleSubmit} />
+          <input type="submit" value="Rechercher" />
         </form>
-        <div>
+
+
+       {this.state.tracks.length > 2 && (<div className="tracksList">
           {this.state.tracks.map((track, index) => {
             return (
-              <div key={index}>
-                {track.name}
-                <button onClick={() => this.addTrack(track)}>X</button>
+              <div key={index} className="tracks">
                 <List
                   component="nav"
                   aria-label="main mailbox folders"
                   style={{ maxHeight: "200px", overflowY: "auto" }}
                 >
-                  {this.state.tracks.map((track, index) => {
-                    return (
-                      <ListItem>
-                        <ListItemText primary={track.name} />
-                        <button onClick={() => this.addTrack(track)}>+</button>
+                
+                  <ListItem>
+                    <div style={{display:"block"}}>
+                    <ListItemText primary={"Titre :" + " " + track.name} />
+                    <ListItemText primary={"Artiste(s) :" + " " + track.artists[0].name} />
+</div>
+                <ListItemAvatar>
+          <Avatar alt={track.album.name} src={track.album.images[2].url} />
+        </ListItemAvatar>    
+                
+               
+                 <div style={{right:"5px"}}><button onClick={() => this.addTrack(track)}>+</button></div>       
                       </ListItem>
-                    );
-                  })}
+                
                 </List>
               </div>
             );
-          })}
+          }
+          
+          
+          )}
+          <div className="buttons_container">
+            <button onClick={this.handleSubmit} className="prev" disabled={this.state.disabled}>Précédent</button>
+
+<button onClick={this.handleSubmit} className="next" disabled={this.state.disabled}>Suivant</button>
+          
+            </div>
         </div>
+       )
+        }
       </div>
     );
   }

@@ -50,7 +50,8 @@ export default class Search extends Component {
   render() {
     return (
       <>
-    {this.state.searchactivated && this.state.input !== "" && this.state.tracks.length > 2 ? ( <div className="globalSearchContainer">
+        {this.state.searchactivated && this.state.input !== "" && this.state.tracks.length > 2 ? (
+          <div className="globalSearchContainer">
         
         
         
@@ -70,7 +71,7 @@ export default class Search extends Component {
         />
         </div>
         
-          <div style={{ height: "360px", width:"100%",display:"flex"}}>
+          <div className="searchedColumns">
           <div
           className="searchCategories"
      
@@ -117,7 +118,7 @@ className="searchCategories"
               return (
                 <List>
                   <ul>
-                    <ListItem textAlign="center" key={index}>
+                    <ListItem textAlign="center" key={index} >
                       <ListItemAvatar>
                         <Avatar src={album.images[2].url} />
                       </ListItemAvatar>

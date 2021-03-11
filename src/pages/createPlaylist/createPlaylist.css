@@ -9,6 +9,13 @@
   .MuiFormLabel-root, .MuiFormControl-root {
   font-size: 0.3rem !important;
 }
+.createListContainer Button {
+  background: yellow;
+}
+.MuiInputBase-input,
+.MuiOutlinedInput-input {
+  background-color: #fff !important;
+}
 @media only screen and (max-width: 1023px) {
   .createForm {
     width: 100%;
@@ -29,14 +36,16 @@
   .createButton {
     height: 30px;
   } /* access to mui button styles properties */
-  .MuiButtonBase-root,
-  .MuiOutlinedInput-root,
-  .MuiInputBase-formControl,.MuiButton-root ,.MuiInputBase-input , .MuiButton-outlined, .createList , .MuiButton-outlinedPrimary,
+  form .MuiButtonBase-root,
+  form .MuiOutlinedInput-root,
+  form .MuiInputBase-formControl,form .MuiButton-root ,form .MuiInputBase-input , form .MuiButton-outlined, form .createList , form .MuiButton-outlinedPrimary,
   /* textfield text size below*/
-  .MuiFormLabel-root, .MuiFormControl-root {
+  form .MuiFormLabel-root, form .MuiFormControl-root {
     font-weight: 900 !important;
-    max-width: 50px !important;
+    width: 50px !important;
     padding: 5px !important;
+    box-sizing: content-box !important;
+    display: flex !important;
   }
 
   /*playlist card*/

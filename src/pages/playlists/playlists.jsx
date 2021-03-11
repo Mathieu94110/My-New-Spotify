@@ -43,12 +43,12 @@ export default class Playlists extends Component {
   };
   render() {
     return (
-      <div style={{ width: "100%", height: "100%", backgroundColor: "yellow" }}>
+      <div className="playListPage">
         <NewPlaylist
           playListId={this.state.playListId}
           refresh={this.refresh}
         />
-        <h1>{this.state.artist}</h1>
+        <h1 className='playlistTitle'>Contenu de la playlist {this.state.artist}</h1>
         <ul>
           {this.state.musics.map((music, index) => {
             return <div key={index}>{music.track.name}</div>;
