@@ -41,6 +41,73 @@ export default class Playlists extends Component {
         console.log(this.state.musics);
       });
   };
+
+
+
+
+
+  deleteTrack = (index,music) => {
+    console.log("Index " + index + " Id " + music.track.id + "  Uri " + music.track.uri)
+    const track_id = music.track.id;
+    const uri = music.track.uri;
+let access_token = localStorage.access_token;
+    const config = {
+      headers: {
+         Accept: "application/json",
+        Authorization: `Bearer ${access_token}`,
+        "Content-Type": "application/json",
+
+      },
+      params: {
+ "tracks": [
+    {
+      "uri": uri,
+      "positions": [
+        track_id
+      ]
+    },
+  ]},
+    };
+
+    axios
+      .delete(`https://api.spotify.com/v1/playlists/${track_id}/tracks`, config)
+      .then((res) => {
+        console.log(res)
+        this.setState({
+          musics: this.state.musics.filter(music => {
+            return music.track !== track_id
+          })
+        });
+
+      })
+      .catch((error) => {
+        // Error
+        if (error.response) {
+          console.log(error.response.data);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+        } if ( error.response && error.response.status >= 400){
+      this.setState({
+        isNotFound: true
+      })
+        }
+        
+        else if (error.request) {
+          console.log(error.request);
+        } else {
+          console.log("Error", error.message);
+        }
+      });
+
+
+}
+
+
+
+
+
+
+
   render() {
     return (
       <div className="playListPage">
@@ -51,7 +118,7 @@ export default class Playlists extends Component {
         <h1 className='playlistTitle'>Contenu de la playlist {this.state.artist}</h1>
         <ul>
           {this.state.musics.map((music, index) => {
-            return <div key={index}>{music.track.name}</div>;
+            return <div key={index}>{music.track.name}<button key={index} onClick={()=>(this.deleteTrack(index,music))}>X</button></div>;
           })}
         </ul>
       </div>

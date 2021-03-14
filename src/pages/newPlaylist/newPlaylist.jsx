@@ -6,6 +6,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import "./newPlaylist.css";
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
+import { isWidthDown } from "@material-ui/core";
 export default class newPlaylist extends Component {
   constructor(props) {
     super(props);
@@ -16,8 +17,11 @@ export default class newPlaylist extends Component {
       playListId: null,
       currentPage: 1,
       offset: 0,
-      disabled:false,
+      disabled: false,
+      next: "",
+      isNotFound:false,
     };
+
   }
   handleChange = (e) => {
     this.setState({
@@ -34,8 +38,9 @@ export default class newPlaylist extends Component {
       params: {
         q: this.state.search,
         type: "track",
+             offset: this.state.offset,
         limit: 50,
-        offset: this.state.offset,
+   
       },
     };
 
@@ -45,7 +50,8 @@ export default class newPlaylist extends Component {
         console.log(res)
         this.setState({
           tracks: [...res.data.tracks.items],
-          offset: this.state.offset += 50
+          next: res.data.tracks.next,
+          offset: this.state.offset 
         });
 
       })
@@ -55,7 +61,13 @@ export default class newPlaylist extends Component {
           console.log(error.response.data);
           console.log(error.response.status);
           console.log(error.response.headers);
-        } else if (error.request) {
+        } if ( error.response && error.response.status >= 400){
+      this.setState({
+        isNotFound: true
+      })
+        }
+        
+        else if (error.request) {
           console.log(error.request);
         } else {
           console.log("Error", error.message);
@@ -63,6 +75,8 @@ export default class newPlaylist extends Component {
       });
 
   };
+
+
 
   addTrack = (track) => {
     let access_token = localStorage.access_token;
@@ -89,53 +103,38 @@ export default class newPlaylist extends Component {
       });
   };
 
-  nextPage = () => {
-    let access_token = localStorage.access_token;
-    const config = {
-      headers: {
-        Authorization: `Bearer ${access_token}`,
-      },
-      params: {
-        q: this.state.search,
-        type: "track",
-        limit: 50,
-        offset: this.state.offset,
-      },
-    };
 
-    axios
-      .get("https://api.spotify.com/v1/search", config)
-      .then((res) => {
-        console.log(res)
-        this.setState({
-          tracks: [...res.data.tracks.items],
-          offset: this.state.offset += 50
-        });
-if (res.status === 404) {
-        console.log("stop")
-          /* this.setState({
-            disabled: !this.state.disabled
-          })*/
-        }
-      })
-      .catch((error) => {
-        // Error
-        
-     if (error.response) {
-          console.log(error.response.data);
-          console.log(error.response.status);
-          console.log(error.response.headers);
-        } else if (error.request) {
-          console.log(error.request);
-        } else {
-          console.log("Error", error.message);
-        }
-      });
-  }
+  changeTracksOffsetPrev = (e) => {
+    if (this.state.offset === 0) {
+      return
+    } else {
+       this.setState({
+              offset: this.state.offset -= 50
+            })
+    }
+   
+    this.handleSubmit(e);
 
-  
+}
+  changeTracksOffsetNext = (e) => {
+    console.log("NEXT : " + this.state.next)
+    if (this.state.isNotFound) {
+      return
+
+
+    }
+    this.setState({
+              offset: this.state.offset += 50
+            })
+    this.handleSubmit(e);
+
+}
+
+ 
   render() {
-console.log(this.state.offset)
+    console.log(this.state.offset)
+
+
     return (
       <div className="newPlaylistPage">
         <form className="searchForMyPlaylist" onSubmit={this.handleSubmit}>
@@ -178,9 +177,9 @@ console.log(this.state.offset)
           
           )}
           <div className="buttons_container">
-            <button onClick={this.handleSubmit} className="prev" disabled={this.state.disabled}>Précédent</button>
+            <button onClick={this.changeTracksOffsetPrev} disabled={this.state.offset == 0 ? true : false} className="prev" >Précédent</button>
 
-<button onClick={this.handleSubmit} className="next" disabled={this.state.disabled}>Suivant</button>
+            <button onClick={this.changeTracksOffsetNext} disabled={this.state.isNotFound } className="next" >Suivant</button>
           
             </div>
         </div>
