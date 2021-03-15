@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/My-New-Spotify/static/css/main.4e43393c.chunk.css",
+    "main.js": "/My-New-Spotify/static/js/main.47b86ff2.chunk.js",
+    "main.js.map": "/My-New-Spotify/static/js/main.47b86ff2.chunk.js.map",
+    "runtime-main.js": "/My-New-Spotify/static/js/runtime-main.07d48b0e.js",
+    "runtime-main.js.map": "/My-New-Spotify/static/js/runtime-main.07d48b0e.js.map",
+    "static/js/2.23e06f3f.chunk.js": "/My-New-Spotify/static/js/2.23e06f3f.chunk.js",
+    "static/js/2.23e06f3f.chunk.js.map": "/My-New-Spotify/static/js/2.23e06f3f.chunk.js.map",
+    "index.html": "/My-New-Spotify/index.html",
+    "precache-manifest.cdc9fc409bed892c864eb4404b165911.js": "/My-New-Spotify/precache-manifest.cdc9fc409bed892c864eb4404b165911.js",
+    "service-worker.js": "/My-New-Spotify/service-worker.js",
+    "static/css/main.4e43393c.chunk.css.map": "/My-New-Spotify/static/css/main.4e43393c.chunk.css.map",
+    "static/js/2.23e06f3f.chunk.js.LICENSE.txt": "/My-New-Spotify/static/js/2.23e06f3f.chunk.js.LICENSE.txt",
+    "static/media/Home.css": "/My-New-Spotify/static/media/home_page_spotify.c639d0d3.jpg",
+    "static/media/logo_spotify.png": "/My-New-Spotify/static/media/logo_spotify.7bcb5a3f.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.07d48b0e.js",
+    "static/js/2.23e06f3f.chunk.js",
+    "static/css/main.4e43393c.chunk.css",
+    "static/js/main.47b86ff2.chunk.js"
+  ]
+}
